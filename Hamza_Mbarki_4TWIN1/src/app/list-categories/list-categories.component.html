@@ -1,51 +1,36 @@
 <div class="container">
   <!-- Zone de recherche -->
   <div class="form-group">
-    <input
-      type="text"
-      class="form-control"
-      id="find"
-      placeholder="Titre catégorie"
-      [(ngModel)]="titre"
-      #title="ngModel"
-    />
+    <input type="text" class="form-control" id="find" placeholder="Titre catégorie" [(ngModel)]="titre" #title="ngModel" />
   </div>
 
   <!-- Liste des catégories -->
   <div class="row">
-
-
     <div class="col-md-4" style="margin-bottom: 20px;" *ngFor="let categorie of categories | contains:title.value">
-      <!-- Application de la condition avec *ngIf -->
       <div *ngIf="titre == '' || categorie.title.toLowerCase().includes(titre.toLowerCase())">
         <!-- Image avec événement click pour afficher la description -->
-        <img
-          (click)="getDescription(categorie.description)"
-          [src]="categorie.image"
-          [alt]="categorie.title"
-          class="img-fluid h-50 w-75"
-          appHighlight
-        />
+        <img (click)="getDescription(categorie.description)" [src]="categorie.image" [alt]="categorie.title" class="img-fluid h-50 w-75" appHighlight />
 
         <!-- Informations de la catégorie -->
         <div>
-          <h3>{{ categorie.title | uppercase }}</h3>
+          <h3>{{ categorie.title }}</h3>
 
           <!-- Message pour les catégories non valides -->
-          <span *ngIf="!categorie.available" class="text-danger">
-            Catégorie non disponible
-          </span>
+          <span *ngIf="!categorie.available" class="text-danger">Catégorie non disponible</span>
 
-          <!-- Bouton affiché uniquement pour les catégories valides -->
-          <button
-            *ngIf="categorie.available"
-            class="btn btn-primary"
-            routerLink="/product/categorie.id"
-          >
-            Voir produits
-          </button>
+          <!-- Boutons affiché uniquement pour les catégories valides -->
+          <div *ngIf="categorie.available">
+            <button class="btn btn-primary" [routerLink]="['/product', categorie.id]">Voir produits</button>
+            <button class="btn btn-primary" [routerLink]="'/products-category'" [queryParams]="{ id: 2 }">Voir produits 2</button>
+            <button class="btn btn-primary" (click)="showDetails(categorie)">Voir détails</button>
+
+          </div>
         </div>
+
+        <!-- Composant de détails de catégorie -->
       </div>
     </div>
   </div>
+  <app-details-category *ngIf="selectedCategory" [category]="selectedCategory"></app-details-category>
+
 </div>

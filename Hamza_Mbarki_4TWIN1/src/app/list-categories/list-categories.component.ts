@@ -9,9 +9,13 @@ import { Categorie } from '../models/categories';
 export class ListCategoriesComponent {
   // Propriété de recherche pour le titre
   titre: string = '';
+  selectedCategory: Categorie | null = null; // Propriété pour stocker la catégorie sélectionnée
 
+  showDetails(categorie: Categorie): void {
+    this.selectedCategory = categorie;
+  }
   // Liste des catégories
-  categories: Categorie[] = [
+   categories: Categorie[] = [
     {
       id: 1,
       title: 'Grand électroménager',

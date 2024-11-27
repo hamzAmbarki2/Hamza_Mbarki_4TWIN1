@@ -18,13 +18,23 @@ import { ContainsPipe } from './contains.pipe';
 import {RouterModule, Routes} from "@angular/router";
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { ProductsCategoryComponent } from './products-category/products-category.component';
+import { ProductsCategoryQPComponent } from './products-category-qp/products-category-qp.component';
+import { DetailsCategoryComponent } from './details-category/details-category.component';
+import {ContactComponent} from "./contact/contact/contact.component";
 const routes: Routes = [
   { path: 'home', component: HomeComponent }, // Route vers HomeComponent
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirection automatique
-  { path: '**', component: NotFoundPageComponent }, // Route pour les paths non définis
-  { path: 'product/:id', component: ProductsCategoryComponent }
+  { path: 'product/:id', component: ProductsCategoryComponent },
+  { path: 'products-category', component: ProductsCategoryQPComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'apropos', component: AproposComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'details-category/:id', component: DetailsCategoryComponent },
+
+  { path: '**', component: NotFoundPageComponent } , // Route pour les paths non définis
 
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +47,9 @@ const routes: Routes = [
     HighlightDirective,
     ContainsPipe,
     NotFoundPageComponent,
-    ProductsCategoryComponent
+    ProductsCategoryComponent,
+    ProductsCategoryQPComponent,
+    DetailsCategoryComponent
   ],
   imports: [
     BrowserModule,
